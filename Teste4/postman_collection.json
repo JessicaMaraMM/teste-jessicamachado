@@ -1,0 +1,127 @@
+{
+  "info": {
+    "_postman_id": "b1e1b1e1-ans-api-collection",
+    "name": "Teste4 API ANS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Coleção de testes para todas as rotas da API Flask do Teste4."
+  },
+  "item": [
+    {
+      "name": "Listar Operadoras (paginado)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/operadoras?page=1&limit=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "operadoras"],
+          "query": [
+            {"key": "page", "value": "1"},
+            {"key": "limit", "value": "10"}
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Exemplo de resposta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"data\": [ {\"CNPJ\": \"10458298000131\", \"Razao_Social\": \"AD SALUTE ADMINISTRADORA DE BENEFÍCIOS LTDA\"} ],\n  \"total\": 1, \"page\": 1, \"limit\": 10\n}"
+        }
+      ]
+    },
+    {
+      "name": "Buscar Operadoras (filtro)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/operadoras?search=unimed",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "operadoras"],
+          "query": [
+            {"key": "search", "value": "unimed"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Detalhes da Operadora",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/operadoras/10458298000131",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "operadoras", "10458298000131"]
+        }
+      },
+      "response": [
+        {
+          "name": "Exemplo de resposta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"CNPJ\": \"10458298000131\",\n  \"RAZAO_SOCIAL\": \"AD SALUTE ADMINISTRADORA DE BENEFÍCIOS LTDA\",\n  \"UF\": \"RJ\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Histórico de Despesas da Operadora",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/operadoras/10458298000131/despesas",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "operadoras", "10458298000131", "despesas"]
+        }
+      },
+      "response": [
+        {
+          "name": "Exemplo de resposta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"cnpj\": \"10458298000131\",\n  \"despesas\": [\n    {\"ANO\": \"2025\", \"TRIMESTRE\": \"1T\", \"VALOR_DESPESA\": \"12345.67\"}\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Estatísticas Agregadas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/estatisticas",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "estatisticas"]
+        }
+      },
+      "response": [
+        {
+          "name": "Exemplo de resposta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"total_despesas\": 123456789.0,\n  \"media_despesas\": 12345.67,\n  \"top5_operadoras\": [ {\"RazaoSocial\": \"UNIMED\", \"TotalDespesas\": 123456.0} ],\n  \"uf_despesas\": {\"SP\": 123456.0, \"RJ\": 654321.0}\n}"
+        }
+      ]
+    }
+  ]
+}
