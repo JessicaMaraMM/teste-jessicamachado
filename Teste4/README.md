@@ -95,4 +95,23 @@ Teste4/
 - **Dados vazios:** Mensagem específica (“Nenhum registro encontrado”) quando não há dados.
 - **Análise crítica:** Mensagens genéricas para erros técnicos (segurança e clareza); mensagens específicas para loading e dados vazios (melhora UX).
 
----
+
+## 🧠 Trade-offs e Análise Crítica
+
+### Paginação
+Implementada por offset (page/limit) por simplicidade. Para grandes volumes, cursor seria mais performático.
+
+### Cache vs queries diretas
+Queries são feitas diretamente no backend. Cache pode ser adicionado para otimizar performance em produção.
+
+### Estrutura de resposta
+As respostas seguem o padrão JSON, com metadados de paginação e dados em arrays.
+
+### Busca
+A busca é feita no backend (servidor), garantindo performance e consistência dos dados.
+
+### Gerenciamento de estado
+O frontend utiliza o estado local do Vue. Para projetos maiores, recomenda-se Vuex/Pinia.
+
+### Performance da tabela
+Paginação e busca no backend evitam sobrecarga no cliente. Para grandes volumes, pode-se usar lazy loading.

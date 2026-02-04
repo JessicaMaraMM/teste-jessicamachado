@@ -4,7 +4,17 @@
 ## 🎯 Objetivo
 Modelar, importar e analisar dados de despesas de operadoras de saúde, tratando inconsistências e justificando decisões técnicas (DDL, ETL e queries analíticas).
 
----
+
+## 🧠 Trade-offs e Análise Crítica
+
+### Normalização
+O modelo foi normalizado (tabelas separadas para operadoras, despesas, agregados) para garantir integridade, evitar redundância e facilitar manutenção.
+
+### Tipos de dados
+Valores monetários usam `DECIMAL(15,2)` para precisão. FLOAT foi descartado por risco de erro de arredondamento.
+
+### Valores NULL em campos obrigatórios
+São rejeitados e registrados em uma tabela de erros (`stg_erros`) para rastreabilidade.
 
 ## ⚖️ Trade-offs e Decisões Técnicas
 

@@ -5,7 +5,26 @@
 
 Pipeline para transformar, validar e enriquecer dados de despesas de operadoras de saúde, cruzando com cadastro ANS, validando CNPJ/razão social e gerando estatísticas agregadas.
 
----
+
+## 🧠 Trade-offs e Análise Crítica
+
+### Estratégia para CNPJs inválidos
+Todos os CNPJs são validados. Os inválidos são marcados com a flag `FlagCNPJInvalido` e mantidos no dataset para rastreabilidade, mas podem ser filtrados em análises posteriores. Não são corrigidos automaticamente para evitar falsos positivos.
+
+### Join (enriquecimento)
+O join entre consolidado e cadastro ANS é feito via `pandas.merge` (estratégia em memória), pois o volume de dados é gerenciável e o pandas oferece flexibilidade e performance para cruzamento e limpeza. SQL/streaming foi descartado por simplicidade e portabilidade.
+
+### Ordenação
+A ordenação dos dados é feita com `sort_values` do pandas, suficiente para o volume atual. Para volumes muito grandes, recomenda-se processamento em lotes ou uso de banco de dados.
+
+### CNPJs duplicados com razões sociais diferentes
+Mantidos ambos os registros, mas marcados para análise posterior. Duplicatas são identificadas e podem ser filtradas.
+
+### Valores zerados ou negativos
+São marcados com a flag `FlagValorSuspeito` e mantidos para auditoria, mas podem ser excluídos em análises.
+
+### Registros sem match no cadastro
+São marcados com a flag `FlagSemCadastro`. Mantidos para transparência, mas sinalizados como incompletos.
 
 ## 🛠️ Tecnologias
 
